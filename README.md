@@ -1,2 +1,2 @@
-# Box-Of-Insanity
-Random tweaks, utilities, mechanics etc
+# KubeJS Scripts
+Random scripts that provide tweaks, utilities, mechanics etc
