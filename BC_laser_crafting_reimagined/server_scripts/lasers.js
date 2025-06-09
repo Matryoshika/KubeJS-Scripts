@@ -16,7 +16,7 @@ let LCTD = 'project_unknown:laser_crafting_table_data'
 
 let laser_input = 40
 let cost_by_time = (lasers, seconds) => {
-    return 40 * 20 * seconds * lasers
+    return laser_input * 20 * seconds * lasers
 }
 
 //Should really make a better recipe structure but this works for now
@@ -43,6 +43,7 @@ BlockEvents.blockEntityTick('project_unknown:laser', event => {
         let corner2 = center.south(2).east(2)
 
         let lasers = []
+		//BetweenClosed is an optimized stream of MutableBlockPos. *Always* save a blockpos to a var by calling .immutable()! Otherwise it will automagically be the last blockpost in the stream!
         $BlockPos.betweenClosed(center.north(2).west(2), center.south(2).east(2)).forEach(bpos => {
             if(level.getBlock(bpos).id == 'project_unknown:laser_crafting_table'){
                 lasers.push(bpos.immutable())
@@ -153,6 +154,7 @@ BlockEvents.blockEntityTick('project_unknown:laser_crafting_table', event => {
             data.putString(CRI, 'minecraft:air')
             craftinginv.extractItem(0, 1, false)
             let output = Item.of(recipe.output.item, recipe.output.amount)
+			//Attempt to put the result in the regular inventory. It returns whichever items didn't fit, in which case we'll have to toss it out into the world
             let remainder = $ItemHandlerUtils.insertItemStacked(inventory, output, false)
 
             //Should only happen if inventory is full
@@ -163,6 +165,9 @@ BlockEvents.blockEntityTick('project_unknown:laser_crafting_table', event => {
     }
 })
 
+//This checks for players within 64 blocks
+//For each player in range, sends a packet of data which is then unpacked in client_scripts/laser_syncing.js
+//be very mindful to not bog down the server-client network too much, and only send when the BE has actually done *something*
 let sendCustomPayload = (id, level, pos, compoundtag) => {
     level.players.stream()
 	.filter( player => player.distanceToSqr(pos) <= 4096) //distance we get is squared, so actual distance we want to check should be <= 64 blocks

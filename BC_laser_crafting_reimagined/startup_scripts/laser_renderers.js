@@ -32,7 +32,7 @@ ClientEvents.blockEntityRendererRegistry(event => {
     )
 })
 
-// These strings are shortcut references to the exact same strings used in server_scripts/lasercrafting.js
+// These strings are shortcut references to the exact same strings used in server_scripts/lasers.js
 let LCT = 'project_unknown:laser_crafting_table_location'
 let LRC = 'project_unknown:laser_randomized_colour'
 let LIA = 'project_unknown:laser_is_active'

@@ -11,7 +11,9 @@ StartupEvents.registry('block', event => {
 			model.parent(`${MOD_ID}:block/laser`)
 		})
 		.blockEntity(info => {
+			//name of this attachment, [sides other blocks can interact through], rows, columns
 			info.inventory('inventory', ['DOWN', 'UP', 'NORTH', 'SOUTH', 'WEST', 'EAST'], 9, 3)
+			//multiple inventories can exist in a block; this one is called "crafting", and does not allow for any sided interactions
 			info.inventory('crafting', [], 1, 1)
 			info.rightClickOpensInventory('inventory')
 			info.ticking()
