@@ -13,6 +13,7 @@ let $RenderType = Java.loadClass('net.minecraft.client.renderer.RenderType')
 let $Font = Java.loadClass('net.minecraft.client.gui.Font')
 let $CMRenderer = Java.loadClass('fr.frinn.custommachinery.client.RenderTypes')
 let $BlockItem = Java.loadClass('net.minecraft.world.item.BlockItem')
+let $Color = Java.loadClass('java.awt.Color')
 
 ClientEvents.blockEntityRendererRegistry(event => {
     event.register("project_unknown:laser_crafting_table", (c) => RenderJSBlockEntityRenderer
