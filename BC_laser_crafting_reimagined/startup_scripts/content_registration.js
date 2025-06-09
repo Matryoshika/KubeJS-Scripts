@@ -8,7 +8,7 @@ StartupEvents.registry('block', event => {
 		.notSolid()
 		.renderType("cutout")
 		.modelGenerator(model => {
-			model.parent(`${MOD_ID}:block/laser`)
+			model.parent(`${MOD_ID}:block/laser_table`)
 		})
 		.blockEntity(info => {
 			//name of this attachment, [sides other blocks can interact through], rows, columns
