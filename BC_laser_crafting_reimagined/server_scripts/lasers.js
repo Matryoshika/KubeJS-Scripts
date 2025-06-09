@@ -171,16 +171,16 @@ BlockEvents.blockEntityTick('project_unknown:laser_crafting_table', event => {
 //For each player in range, sends a packet of data which is then unpacked in client_scripts/laser_syncing.js
 //be very mindful to not bog down the server-client network too much, and only send when the BE has actually done *something*
 let sendCustomPayload = (id, level, pos, compoundtag) => {
-    level.players.stream()
-	.filter( player => player.distanceToSqr(pos) <= 4096) //distance we get is squared, so actual distance we want to check should be <= 64 blocks
-	.forEach( player => {
-		player.sendData(id, {
-            lasertable: compoundtag,
-            laserpos: {
-                x: pos.x,
-                y: pos.y,
-                z: pos.z
-            }
-        })
-	})
+	level.players.stream()
+		.filter(player => player.distanceToSqr(pos) <= 4096) //distance we get is squared, so actual distance we want to check should be <= 64 blocks
+		.forEach(player => {
+			player.sendData(id, {
+				lasertable: compoundtag,
+				laserpos: {
+					x: pos.x,
+					y: pos.y,
+					z: pos.z
+				}
+			})
+		})
 }
