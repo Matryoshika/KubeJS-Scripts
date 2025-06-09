@@ -25,6 +25,7 @@ let set_laser_recipes = () => {
     filter.put('minecraft:diamond', { input: { item: 'minecraft:diamond' }, energyCost: cost_by_time(1,10), output: { item: 'minecraft:diamond_block', amount: 1 } })
     filter.put('minecraft:diamond_block', { input: { item: 'minecraft:diamond_block' }, energyCost: cost_by_time(12,10), output: { item: 'minecraft:nether_star', amount: 1 } })
     filter.put('minecraft:heart_of_the_sea', { input: { item: 'minecraft:heart_of_the_sea' }, energyCost: cost_by_time(25,256), output: { item: 'minecraft:nether_star', amount: 1 } })
+    filter.put('minecraft:iron_ingot', { input: { item: 'minecraft:iron_ingot' }, energyCost: cost_by_time(25,8), output: { item: 'minecraft:iron_sword', amount: 1 } })
     return filter
 }
 
@@ -43,7 +44,7 @@ BlockEvents.blockEntityTick('project_unknown:laser', event => {
         let corner2 = center.south(2).east(2)
 
         let lasers = []
-		//BetweenClosed is an optimized stream of MutableBlockPos. *Always* save a blockpos to a var by calling .immutable()! Otherwise it will automagically be the last blockpost in the stream!
+        //BetweenClosed is an optimized stream of MutableBlockPos. *Always* save a blockpos to a var by calling .immutable()! Otherwise it will automagically be the last blockpos in the stream!
         $BlockPos.betweenClosed(center.north(2).west(2), center.south(2).east(2)).forEach(bpos => {
             if(level.getBlock(bpos).id == 'project_unknown:laser_crafting_table'){
                 lasers.push(bpos.immutable())
@@ -64,6 +65,7 @@ BlockEvents.blockEntityTick('project_unknown:laser', event => {
 
     let c = entity.getPersistentData().getIntArray(LCT)
     if(c[0] == 0 && c[1] == -1 && c[2] == 0){
+        entity.getPersistentData().remove(LCT)
         return
     }
     let tablepos = new $BlockPos(c[0], c[1], c[2])
@@ -154,7 +156,7 @@ BlockEvents.blockEntityTick('project_unknown:laser_crafting_table', event => {
             data.putString(CRI, 'minecraft:air')
             craftinginv.extractItem(0, 1, false)
             let output = Item.of(recipe.output.item, recipe.output.amount)
-			//Attempt to put the result in the regular inventory. It returns whichever items didn't fit, in which case we'll have to toss it out into the world
+            //Attempt to put the result in the regular inventory. It returns whichever items didn't fit, in which case we'll have to toss it out into the world
             let remainder = $ItemHandlerUtils.insertItemStacked(inventory, output, false)
 
             //Should only happen if inventory is full

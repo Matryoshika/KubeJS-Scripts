@@ -32,7 +32,7 @@ ClientEvents.blockEntityRendererRegistry(event => {
     )
 })
 
-// These strings are shortcut references to the exact same strings used in server_scripts/lasers.js
+// These strings are shortcut references to the exact same strings used in server_scripts/lasercrafting.js
 let LCT = 'project_unknown:laser_crafting_table_location'
 let LRC = 'project_unknown:laser_randomized_colour'
 let LIA = 'project_unknown:laser_is_active'
@@ -69,7 +69,7 @@ let laser_table_renderer = (renderer, context) => {
         //So we gotta use the same scale here if we want to know the proper width of the text, so that we can center it properly on the table later
 		let txtw = Client.font['width(java.lang.String)'](energy_text) * 0.005
 
-        //i is used as an idex and the text is rotated by 90xi degrees
+        //i is used as an index and the text is rotated by 90xi degrees
         //the 2147483647 is the lightlevel, from 0-max_int, but honestly has very little effect on the text in most conditions
         //cleanerTextRenderer pushes and pops by itself. Its code could have been left in here but letting it be its own function makes it a bit neater
 		for(let i = 1; i < 5; i++)
