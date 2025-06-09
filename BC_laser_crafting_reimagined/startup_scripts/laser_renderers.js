@@ -69,10 +69,17 @@ let laser_table_renderer = (renderer, context) => {
 		//So we gotta use the same scale here if we want to know the proper width of the text, so that we can center it properly on the table later
 		let txtw = Client.font['width(java.lang.String)'](energy_text) * 0.005
 
+<<<<<<< HEAD
 		//i is used as an index and the text is rotated by 90xi degrees
 		//the 2147483647 is the lightlevel, from 0-max_int, but honestly has very little effect on the text in most conditions
 		//cleanerTextRenderer pushes and pops by itself. Its code could have been left in here but letting it be its own function makes it a bit neater
 		for (let i = 1; i < 5; i++)
+=======
+        //i is used as an index and the text is rotated by 90xi degrees
+        //the 2147483647 is the lightlevel, from 0-max_int, but honestly has very little effect on the text in most conditions
+        //cleanerTextRenderer pushes and pops by itself. Its code could have been left in here but letting it be its own function makes it a bit neater
+		for(let i = 1; i < 5; i++)
+>>>>>>> origin/main
 			cleanerTextRenderer(i, energy_text, txtw, context, 2147483647)
 
 
