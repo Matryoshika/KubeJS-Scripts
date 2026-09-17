@@ -37,7 +37,6 @@ let buildAndOpenInventory = (event, col, row) => {
 	let {item, player} = event
 	let total = col * row
 
-	//console.log(Object.keys(customBagSizes))
 	//Fetch a cached- or create- an empty representation of the bag, we will fill this later
 	//Sadly Rhino screams if we supply a number as key to Map.computeIfAbsent so we convert to string and then back again
 	let EMPTY_GUI = fetchSizedBag(total.toString())
