@@ -1,6 +1,6 @@
 //requires: KubeJS Client
 //requires: renderjs
-//reguires: custommachinery
+//requires: custommachinery
 
 /* ^ first line ensures that this rendering script is only loaded when on the client!
  * Very bad juju if client-side code is even referenced on the server, but we have to put this in startup because `ClientEvents.blockEntityRendererRegistry` is startup_script only. Cause logic
