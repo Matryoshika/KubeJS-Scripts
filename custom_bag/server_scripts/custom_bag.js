@@ -1,8 +1,7 @@
 let $SC = Java.loadClass('net.minecraft.world.SimpleContainer')
 let $DC = Java.loadClass('net.minecraft.core.component.DataComponents')
 let $ICC = Java.loadClass('net.minecraft.world.item.component.ItemContainerContents')
-let $HashMap = Java.loadClass('java.util.HashMap')
-let customBagSizes = new $HashMap()
+let customBagSizes = Utils.newMap()
 
 ItemEvents.rightClicked('kubejs:leather_bag', event => {
 	buildAndOpenInventory(event, 9, 3)
@@ -19,10 +18,8 @@ ItemEvents.rightClicked('kubejs:diamond_bag', event => {
  */
 let fetchSizedBag = (slots) => {
 	return customBagSizes.computeIfAbsent(slots, key => {
-		let inv = [];
-		for(let i = 0; i < Number(key); i++)
-			inv.push(Item.of('minecraft:air'))
-		return inv
+		let inv = new Array(Number(key))
+		return inv.fill(Item.of('minecraft:air'))
 	})
 }
 
